@@ -8,32 +8,135 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "IPoolable",
+"class": "BackgroundObject",
+"language": "GDScript",
+"path": "res://assets/maps/lobby/background_object.gd"
+}, {
+"base": "Control",
+"class": "ControlBase",
+"language": "GDScript",
+"path": "res://assets/common/classes/ui/base/controlbase.gd"
+}, {
+"base": "ControlBase",
+"class": "ControlTask",
+"language": "GDScript",
+"path": "res://assets/common/classes/ui/task/controltask.gd"
+}, {
+"base": "Node2D",
+"class": "IPoolable",
+"language": "GDScript",
+"path": "res://assets/common/classes/objectpool/ipoolable.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Item",
+"language": "GDScript",
+"path": "res://assets/items/item.gd"
+}, {
+"base": "Node2D",
+"class": "ItemHandler",
+"language": "GDScript",
+"path": "res://assets/player/item_handler.gd"
+}, {
+"base": "Resource",
+"class": "MapInfo",
+"language": "GDScript",
+"path": "res://assets/common/classes/resources/mapinfo/mapinfo.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://assets/player/player.gd"
+}, {
+"base": "Node",
+"class": "PoolManager",
+"language": "GDScript",
+"path": "res://assets/common/classes/objectpool/poolmanager.gd"
+}, {
+"base": "Popup",
+"class": "PopupBase",
+"language": "GDScript",
+"path": "res://assets/common/classes/ui/base/popupbase.gd"
+}, {
+"base": "PopupPanel",
+"class": "PopupPanelBase",
+"language": "GDScript",
+"path": "res://assets/common/classes/ui/base/popuppanelbase.gd"
+}, {
+"base": "PopupPanelBase",
+"class": "PopupPanelTask",
+"language": "GDScript",
+"path": "res://assets/common/classes/ui/task/popuppaneltask.gd"
+}, {
+"base": "PopupBase",
+"class": "PopupTask",
+"language": "GDScript",
+"path": "res://assets/common/classes/ui/task/popuptask.gd"
+}, {
+"base": "WindowDialog",
+"class": "WindowDialogBase",
+"language": "GDScript",
+"path": "res://assets/common/classes/ui/base/windowdialogbase.gd"
+}, {
+"base": "WindowDialogBase",
+"class": "WindowDialogTask",
+"language": "GDScript",
+"path": "res://assets/common/classes/ui/task/windowdialogtask.gd"
+} ]
 _global_script_class_icons={
-
+"BackgroundObject": "",
+"ControlBase": "",
+"ControlTask": "",
+"IPoolable": "",
+"Item": "",
+"ItemHandler": "",
+"MapInfo": "",
+"Player": "",
+"PoolManager": "",
+"PopupBase": "",
+"PopupPanelBase": "",
+"PopupPanelTask": "",
+"PopupTask": "",
+"WindowDialogBase": "",
+"WindowDialogTask": ""
 }
 
 [application]
 
 config/name="opensuspect"
-run/main_scene="res://scenes/ui/title.tscn"
+run/main_scene="res://assets/ui/mainmenu/mainmenu.tscn"
 config/use_custom_user_dir=true
-boot_splash/image="res://bootsplash.png"
-config/icon="res://icon.png"
+boot_splash/image="res://assets/common/textures/icons/bootsplash.png"
+config/icon="res://assets/common/textures/icons/icon.png"
 config/version="dev"
 
 [autoload]
 
-Network="*res://scripts/network.gd"
+Network="*res://assets/autoload/network.gd"
+GameManager="*res://assets/autoload/gamemanager.gd"
+PlayerManager="*res://assets/autoload/playermanager.gd"
+SceneManager="*res://assets/autoload/scenemanager.gd"
+UIManager="*res://assets/autoload/uimanager.gd"
+MapManager="*res://assets/autoload/mapmanager.gd"
+TaskManager="*res://assets/autoload/taskmanager.gd"
+Helpers="*res://assets/autoload/helpers.gd"
+SaveLoadHandler="*res://assets/autoload/saveloadhandler.gd"
+AppearanceManager="*res://assets/autoload/appearancemanager.gd"
 
 [display]
 
+window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
-window/stretch/aspect="keep"
+window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "opensusinteraction" )
 
 [gui]
 
-theme/custom_font="res://assets/fonts/menufont.tres"
+theme/custom_font="res://assets/common/fonts/menufont.tres"
 
 [input]
 
@@ -74,10 +177,38 @@ ui_page_up={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777235,"unicode":0,"echo":false,"script":null)
  ]
 }
+kill={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":70,"unicode":0,"echo":false,"script":null)
+ ]
+}
+reload={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
+ ]
+}
+interact={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[layer_names]
+
+2d_physics/layer_1="terrain"
+2d_physics/layer_2="players"
+2d_physics/layer_3="scientists"
+2d_physics/layer_4="infiltrators"
+2d_physics/layer_5="interactive"
+2d_physics/layer_6="corpse"
 
 [locale]
 
-translations=PoolStringArray( "res://locale/en.po", "res://locale/sr.po", "res://locale/de.po", "res://locale/fr.po", "res://locale/es.po", "res://locale/el.po", "res://locale/af.po", "res://locale/ar.po", "res://locale/ca.po", "res://locale/cs.po", "res://locale/da.po", "res://locale/fi.po", "res://locale/he.po", "res://locale/hu.po", "res://locale/it.po", "res://locale/ja.po", "res://locale/ko.po", "res://locale/nl.po", "res://locale/no.po", "res://locale/pl.po", "res://locale/pt.po", "res://locale/ro.po", "res://locale/ru.po", "res://locale/sv.po", "res://locale/tr.po", "res://locale/uk.po", "res://locale/vi.po", "res://locale/zh.po" )
+translations=PoolStringArray( "res://locale/de.po", "res://locale/el.po", "res://locale/en.po", "res://locale/es.po", "res://locale/fr.po", "res://locale/hu.po", "res://locale/ko.po", "res://locale/ro.po", "res://locale/sr.po", "res://locale/sv.po" )
 locale_filter=[ 0, [  ] ]
 
 [rendering]
@@ -85,4 +216,5 @@ locale_filter=[ 0, [  ] ]
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
+environment/default_clear_color=Color( 0.121569, 0.121569, 0.121569, 1 )
 environment/default_environment="res://default_env.tres"

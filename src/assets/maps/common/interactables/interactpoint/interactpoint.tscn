@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/maps/common/interactables/interactpoint/interactpoint.gd" type="Script" id=1]
+[ext_resource path="res://addons/opensusinteraction/resources/interact/interact.tres" type="Resource" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1, 1 )
+
+[node name="interactpoint" type="StaticBody2D" groups=[
+"interactpoints",
+]]
+collision_layer = 2147483664
+collision_mask = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}
+interact_resource = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
